@@ -6,4 +6,7 @@ import inventario_app.sistema_inventario.Modelo.Marca;
 
 public interface MarcaRepository extends JpaRepository<Marca, Integer> {
 
+    public boolean existsByNombreIgnoreCase(String nombre);
+
+    public boolean existsByNombreIgnoreCaseAndIdNot(String nombre, Integer id);
 }

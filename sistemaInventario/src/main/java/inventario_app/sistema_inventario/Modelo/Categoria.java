@@ -54,4 +54,9 @@ public class Categoria {
         this.marca = marca;
     }
 
+    @Override
+    public String toString() {
+        return nombre;
+    }
+
 }

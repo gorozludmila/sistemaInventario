@@ -36,8 +36,18 @@ public class MarcaController {
         return "marca_formulario";
     }
 
+    //sirve para craer y editar
     @PostMapping("/marcas/guardar")
-    public String guardarMarca(Marca marca) {
+    public String guardarMarca(Marca marca, RedirectAttributes ra) {
+
+        boolean existe = (marca.getId() == null)
+                ? marcaRepository.existsByNombreIgnoreCase(marca.getNombre())
+                : marcaRepository.existsByNombreIgnoreCaseAndIdNot(marca.getNombre(), marca.getId());
+
+        if (existe) {
+            ra.addFlashAttribute("error", "Ya existe una marca con ese  nombre");
+            return "redirect:/marcas/nuevo";
+        }
         marcaRepository.save(marca);
         return "redirect:/marcas";
     }
@@ -46,6 +56,7 @@ public class MarcaController {
     public String editarMarca(@PathVariable Integer id, Model modelo) {
         Marca marca = marcaRepository.findById(id).orElse(null);
         modelo.addAttribute("marca", marca);
+        modelo.addAttribute("listaCategorias", categoriaRepository.findAll());
         return "marca_formulario";
     }
 

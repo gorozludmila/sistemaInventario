@@ -26,7 +26,9 @@
         <h1 th:unless="${marca.id==null}"> Editar marca </h1>
     </div>
     <form th:action="@{/marcas/guardar}" th:object="${marca}" method="post" style="max-width:600px; margin:0;">
-        <div class="m-3">
+      <input type="hidden" th:field="*{id}" />
+  
+      <div class="m-3">
             <div class="form-group row">
                 <label class="col-form-label col-sm-4">Nombre: </label>
                 <div class="col-sm-8">

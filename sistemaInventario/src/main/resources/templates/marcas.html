@@ -31,6 +31,7 @@
             <tr>
             <th scope="col">ID</th>
             <th scope="col">Nombre</th>
+            <th scope="col">Categoria</th>
             <th scope="col">Acciones</th>
             </tr>
         </thead>
@@ -38,6 +39,7 @@
             <tr th:each="marca : ${listaMarca}">
             <td th:text = "${marca.id}"></td>
             <td th:text = "${marca.nombre}"></td>
+            <td th:text = "${marca.categorias}"></td>
             <td>
               <a th:href="@{/marcas/editar/{id}(id=${marca.id})}" class="btn btn-warning btn-sm">Editar</a>
               <a th:href="@{/marcas/eliminar/{id}(id=${marca.id})}" class="btn btn-danger btn-sm"  onclick="return confirm('¿Eliminar marca?')">Eliminar</a>

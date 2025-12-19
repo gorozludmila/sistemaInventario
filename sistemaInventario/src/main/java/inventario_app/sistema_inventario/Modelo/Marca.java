@@ -32,6 +32,10 @@ public class Marca {
         this.id = id;
     }
 
+    public Marca(String nombre) {
+        this.nombre = nombre;
+    }
+
     public Marca(String nombre, List<Categoria> categorias) {
         this.nombre = nombre;
         this.categorias = categorias;
@@ -59,6 +63,11 @@ public class Marca {
 
     public void setCategorias(List<Categoria> categorias) {
         this.categorias = categorias;
+    }
+
+    @Override
+    public String toString() {
+        return "Marca [categorias=" + categorias + "]";
     }
 
 }
