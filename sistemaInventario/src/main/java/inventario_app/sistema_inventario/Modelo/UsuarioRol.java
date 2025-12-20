@@ -5,17 +5,17 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Table(name = "usuario_rol")
-public class Usuario_rol {
+public class UsuarioRol {
 
-    @ManyToOne(optional = false)
+    @ManyToOne
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
-    @ManyToOne(optional = false)
+    @ManyToOne
     @JoinColumn(name = "rol_id")
     private Rol rol;
 
-    public Usuario_rol() {
+    public UsuarioRol() {
     }
 
     public Usuario getUsuario() {

@@ -28,10 +28,17 @@ public class ProductoDetalle {
 
     public ProductoDetalle() {
     }
-    public ProductoDetalle(String nombre, String valor, Producto producto){
-        this.nombre=nombre;
-        this.valor=valor;
-        this.producto=producto;
+
+    public ProductoDetalle(Integer id, String nombre, String valor) {
+        this.id = id;
+        this.nombre = nombre;
+        this.valor = valor;
+    }
+
+    public ProductoDetalle(String nombre, String valor, Producto producto) {
+        this.nombre = nombre;
+        this.valor = valor;
+        this.producto = producto;
     }
 
     public Integer getId() {
@@ -64,6 +71,11 @@ public class ProductoDetalle {
 
     public void setProducto(Producto producto) {
         this.producto = producto;
+    }
+
+    @Override
+    public String toString() {
+        return nombre + " - " + valor;
     }
 
 }

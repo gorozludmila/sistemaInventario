@@ -38,15 +38,24 @@ public class ProductoController {
     }
 
     @PostMapping("/productos/guardar")
-    public String guardarProducto(Producto producto, HttpServletRequest request ) {
+    public String guardarProducto(Producto producto, HttpServletRequest request) {
+
+        String[] detallesIDs = request.getParameterValues("detallesIDs");
         String[] detallesNombres = request.getParameterValues("detallesNombres");
         String[] detallesValores = request.getParameterValues("detallesValores");
 
-       
-
+        if (detallesNombres != null) {
+            for (int i = 0; i < detallesNombres.length; i++) {
+                if (detallesIDs != null && detallesIDs.length > 0) {
+                    Integer id = Integer.parseInt(detallesIDs[i]);
+                    producto.setDetalle(id, detallesNombres[i], detallesValores[i]);
+                } else {
+                    producto.añadirDetalles(detallesNombres[i], detallesValores[i]);
+                }
+            }
+        }
         productoRepository.save(producto);
         return "redirect:/productos";
-
     }
 
     @GetMapping("/productos/editar/{id}")
@@ -68,7 +77,5 @@ public class ProductoController {
             ra.addFlashAttribute("error", "No se puede eliminar el producto porque está en un carrito");
         }
         return "redirect:/productos";
-
     }
-
 }

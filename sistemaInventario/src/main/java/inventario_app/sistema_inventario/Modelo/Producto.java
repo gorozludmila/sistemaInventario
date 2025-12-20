@@ -23,8 +23,8 @@ public class Producto {
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
-    @OneToMany(mappedBy ="producto", cascade = CascadeType.ALL)
-    private List<ProductoDetalle> detalles  = new ArrayList<>();
+    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
+    private List<ProductoDetalle> detalles = new ArrayList<>();
 
     public Producto() {
     }
@@ -65,9 +65,19 @@ public class Producto {
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
-    
 
-    public void añadirDetalles(String nombre, String valor){
+    public List<ProductoDetalle> getDetalles() {
+        return detalles;
+    }
+
+    public void setDetalles(List<ProductoDetalle> detalles) {
+        this.detalles = detalles;
+    }
+    public void setDetalle(Integer id, String nombre, String valor) {
+        this.detalles.add(new ProductoDetalle(id, nombre, valor));
+    }
+
+    public void añadirDetalles(String nombre, String valor) {
         this.detalles.add(new ProductoDetalle(nombre, valor, this));
     }
 
