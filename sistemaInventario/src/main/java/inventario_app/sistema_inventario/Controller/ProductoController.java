@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import inventario_app.sistema_inventario.Modelo.Producto;
 import inventario_app.sistema_inventario.Repository.CategoriaRepository;
 import inventario_app.sistema_inventario.Repository.ProductoRepository;
+import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class ProductoController {
@@ -37,8 +38,13 @@ public class ProductoController {
     }
 
     @PostMapping("/productos/guardar")
-    public String guardarProducto(Producto prod) {
-        productoRepository.save(prod);
+    public String guardarProducto(Producto producto, HttpServletRequest request ) {
+        String[] detallesNombres = request.getParameterValues("detallesNombres");
+        String[] detallesValores = request.getParameterValues("detallesValores");
+
+       
+
+        productoRepository.save(producto);
         return "redirect:/productos";
 
     }

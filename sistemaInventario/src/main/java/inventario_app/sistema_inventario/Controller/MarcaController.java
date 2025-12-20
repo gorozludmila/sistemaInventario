@@ -54,7 +54,7 @@ public class MarcaController {
 
     @GetMapping("/marcas/editar/{id}")
     public String editarMarca(@PathVariable Integer id, Model modelo) {
-        Marca marca = marcaRepository.findById(id).orElse(null);
+        Marca marca = marcaRepository.findById(id).get();
         modelo.addAttribute("marca", marca);
         modelo.addAttribute("listaCategorias", categoriaRepository.findAll());
         return "marca_formulario";
@@ -68,5 +68,4 @@ public class MarcaController {
         marcaRepository.deleteById(id);
         return "redirect:/marcas";
     }
-
 }

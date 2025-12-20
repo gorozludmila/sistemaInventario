@@ -5,7 +5,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Producto {
@@ -20,6 +22,9 @@ public class Producto {
     @ManyToOne(optional = false)
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
+
+    @OneToMany(mappedBy ="producto", cascade = CascadeType.ALL)
+    private List<ProductoDetalle> detalles  = new ArrayList<>();
 
     public Producto() {
     }
@@ -59,6 +64,11 @@ public class Producto {
 
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
+    }
+    
+
+    public void añadirDetalles(String nombre, String valor){
+        this.detalles.add(new ProductoDetalle(nombre, valor, this));
     }
 
 }
