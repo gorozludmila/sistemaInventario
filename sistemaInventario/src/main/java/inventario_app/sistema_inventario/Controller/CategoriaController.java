@@ -17,13 +17,13 @@ import inventario_app.sistema_inventario.Repository.MarcaRepository;
 public class CategoriaController {
 
     @Autowired
-    private CategoriaRepository categoria;
+    private CategoriaRepository categoriaRepository;
     @Autowired
     private MarcaRepository marcaRepository;
 
     @GetMapping("/categorias")
     public String listarCategorias(Model modelo) {
-        List<Categoria> listaCategoria = categoria.findAll();
+        List<Categoria> listaCategoria = categoriaRepository.findAll();
         modelo.addAttribute("listaCategoria", listaCategoria);
         return "categoria";
     }
@@ -37,7 +37,7 @@ public class CategoriaController {
 
     @PostMapping("/categorias/guardar")
     public String guardarCategoria(@ModelAttribute Categoria cat) {
-        categoria.save(cat);
+        categoriaRepository.save(cat);
         return "redirect:/categorias";
     }
 }
